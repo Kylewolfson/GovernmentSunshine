@@ -1,14 +1,19 @@
 var apiKey = require('./../.env').apiKey;
 
-exports.gitCall = function(userName) {
-  $.ajax('https://api.github.com/users/' + userName + '/repos?access_token=' + apiKey).then(function(response)
+exports.gitCall = function(userName, displayResult) {
+  var url;
+  if (apiKey) {
+    url = 'https://api.github.com/users/' + userName + '/repos?access_token=' + apiKey;
+  } else {
+    url = 'https://api.github.com/users/' + userName + '/repos';
+  }
+
+  $.ajax(url).then(function(response)
   {
-    console.log(response);
     response.forEach(function(repo) {
-      if (repo.description == ''){
-        repo.description = 'No description provided';
-      }
-      $('#apiReturn').append('<strong>Repo name: ' + repo.name + '</strong><br>Repo description: ' + repo.description + '<br><br>');
+      displayResult(repo);
     });
+  }).fail(function(error){
+    console.log(error);
   });
 };
