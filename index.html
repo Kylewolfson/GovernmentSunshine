@@ -10,10 +10,11 @@
   <body>
     <div class="container">
       <h1>Make a github API call!</h1>
-      <label for="userName">Enter a github username to have it return a list of their repositories!</label>
+      <label for="userName">Enter a github username to have it return their profile or a list of their repositories!</label>
       <input id="userName" type="text" class="form-control">
       <br>
-      <button class="btn btn-primary" id="makeCall">Submit username!</button>
+      <button class="btn btn-primary" id="requestRepos">Get repos!</button>
+      <button class="btn btn-info" id="requestProfile">Get profile!</button>
       <hr>
       <div id="apiReturn">
 
