@@ -1,5 +1,5 @@
-// var Bill = require('./../js/bill.js').Bill;
-// var Crawler = require('./../js/crawler.js').Crawler;
+var Bill = require('./../js/bill.js').Bill;
+var Crawler = require('./../js/crawler.js').Crawler;
 var bills = [];
 
 var getObject = function(object){

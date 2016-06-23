@@ -25,4 +25,3 @@ exports.Crawler.prototype.getCompanies = function(listFunction){
     listFunction(companyNames);
   });
 }
-
