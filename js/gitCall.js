@@ -1,4 +1,5 @@
-var apiKey = require('./../.env').apiKey;
+// var apiKey = require('./../.env').apiKey;
+var apiKey = "";
 
 exports.profileCall = function(userName, displayProfile) {
   var url;

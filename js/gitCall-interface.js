@@ -1,4 +1,4 @@
-var apiKey = require('./../.env').apiKey;
+// var apiKey = require('./../.env').apiKey;
 var gitCall = require('./../js/gitCall.js').gitCall;
 var profileCall = require('./../js/gitCall.js').profileCall;
 
