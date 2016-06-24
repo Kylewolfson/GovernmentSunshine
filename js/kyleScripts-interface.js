@@ -52,8 +52,7 @@ $(document).ready(function(){
               cy.add({
                 data: {
                   source: title,
-                  target: company,
-                  weight: .00001
+                  target: company
                 }
               })
               console.log("Company: " + company);
@@ -85,10 +84,244 @@ $(document).ready(function(){
       cy.add({
         data: {
           source: fullName,
-          target: title,
-          weight: .1
+          target: title
         }
       })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+      cy.add({
+        data: {
+          source: fullName,
+          target: title
+        }
+      })
+
       var openSecrets = responseJSON.results[i].number;
       var temp = responseJSON.results[i];
     }
@@ -99,6 +332,9 @@ $(document).ready(function(){
       avoidOverlap: false,
       concentric: function(){ // returns numeric value for each node, placing higher nodes in degrees towards the centre
         return this.degree();
+      },
+      levelWidth: function( nodes ){ // the variation of concentric values in each level
+        return nodes.maxDegree() / 800;
       }
     });
 
