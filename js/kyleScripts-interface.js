@@ -10,20 +10,21 @@ $(document).ready(function(){
   }
   var key = 'a10550b4ef1141b580b7581fe3c76b1f';
 
-  var firstName = "Harry";
-  var lastName = "Reid";
-  var fullName = firstName + ' ' + lastName;
-
-  function getLegislatorID() {
+  function getLegislatorID(firstName, lastName) {
+    var fullName = firstName + " " + lastName;
+    cy.add({
+       data: { id: fullName, faveColor: 'black', faveShape: 'ellipse', degree: 0}
+    })
     var url = 'http://congress.api.sunlightfoundation.com/legislators?first_name='+ firstName+'&last_name='+ lastName+'&apikey=' + key;
     return $.getJSON(url).then(function(responseJSON) {
       var legislatorID = responseJSON.results[0].bioguide_id;
-      findBills(legislatorID);
+      findBills(legislatorID, fullName);
       return responseJSON.results;
     });
  }
 
-  function findBills(legislatorID){
+  function findBills(legislatorID, fullName){
+  //debugger;
   var id = legislatorID;
   var bills = 'http://congress.api.sunlightfoundation.com/bills?sponsor_id='+ id +'&apikey='+key;
   var billsCall = $.getJSON(bills);
@@ -38,8 +39,10 @@ $(document).ready(function(){
       }
       $('#someDiv').append("<span id=" + billID + "><li>"+title+"</li></span>");
       $('#'+ billID).click(function()  {
-
-        var toServer = 'http://localhost:4000/newServer';
+        var billId = this.id;
+        //console.log(billId);
+        var toServer = 'http://localhost:4000/newServer/'+billId;
+        var displayTitle = $('#'+billId).text().slice(0, 25);
 
         $.getJSON(toServer).then(function(response){
           //console.log(response.body);
@@ -47,11 +50,11 @@ $(document).ready(function(){
             $('#issue_summary > tbody > tr > td:nth-child(1)').each(function( index ) {
               var company = $(this).text().trim();
               cy.add({
-                data: { id: company, degree: 2}
+                data: { id: company, faveShape: 'triangle', faveColor: 'red', degree: 2}
               })
               cy.add({
                 data: {
-                  source: title,
+                  source: displayTitle,
                   target: company
                 }
               })
@@ -71,7 +74,7 @@ $(document).ready(function(){
       })
       title = title.slice(0, 25);
       cy.add({
-        data: { id: title, degree: 1}
+        data: { id: title, faveShape: 'rectangle', faveColor: 'blue', degree: 1}
       })
       cy.add({
         data: {
@@ -107,18 +110,21 @@ $(document).ready(function(){
   })
   }
 
-  $('#billsInput').keydown(function(event) {
-    if (event.keyCode == 13) {
-      this.form.submit();
-      return false;
-      console.log("enter works!");
+  $('.politicianSearch').keypress(function(event){
+    if(event.keyCode==13) {
+      event.preventDefault();
+      var fullName = $('#politicianInput').val();
+      var firstName = fullName.split(" ")[0];
+      var lastName = fullName.split(" ")[1];
+      console.log(firstName+lastName);
+      getLegislatorID(firstName, lastName)
+      $('div.hiddenPoliticians').fadeIn(7000).removeClass('hiddenPoliticians');
+      $('div.introContent').fadeOut(4000);
     }
   });
+
   var cy = cytoscape({
   container: document.getElementById('cy'),
-  elements: [
-    { data: { id: fullName, degree: 0}}
-  ],
   layout: {
     name:'concentric'
   },
@@ -126,11 +132,10 @@ $(document).ready(function(){
         {
             selector: 'node',
             style: {
-                shape: 'hexagon',
-                'background-color': 'red',
+                shape: 'data(faveShape)',
+                'background-color': 'data(faveColor)',
                 label: 'data(id)'
             }
         }]
       });
-getLegislatorID();
 });

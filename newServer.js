@@ -4,10 +4,12 @@ var request = require('request');
 var bodyParser = require('body-parser');
 var app = express();
 
-app.get('/newServer', function(httpRequest, httpResponse) {
-  var url = 'https://www.opensecrets.org/lobby/billsum.php?id=s2013-114';
+app.get('/newServer/:billId', function(httpRequest, httpResponse) {
+  debugger;
+  var url = 'https://www.opensecrets.org/lobby/billsum.php?id=' + httpRequest.params.billId;
+  console.log(url);
   request.get(url, function(error, steamHttpResponse, steamHttpBody) {
-    console.log(steamHttpResponse);
+    //console.log(steamHttpResponse);
     httpResponse.setHeader('Content-Type', 'application/json');
     httpResponse.setHeader('Access-Control-Allow-Origin', '*');
     httpResponse.send(steamHttpResponse);
