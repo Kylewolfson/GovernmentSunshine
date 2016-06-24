@@ -6,7 +6,7 @@
 
 ## Description
 
-_This application utilizes three main componennts to draw inferences concerning bills and those lobbying for them: 1) cytoscape.js to "draw" connections; 2) several API calls--sometimes nested--which ultimately feed a webcrawler, which requests certain information from our server, newServer.js; and 3) implementation of materialize for styling purposes. This project was compiled using Node.js_
+_This application utilizes three main components in order to draw inferences concerning bills and those lobbying for them: 1) cytoscape.js to "draw" connections; 2) several API calls--sometimes nested--which ultimately feed a webcrawler; and 3) implementation of materialize for styling purposes. This project was compiled using Node.js_
 
 ## Setup/Installation Requirements
 
