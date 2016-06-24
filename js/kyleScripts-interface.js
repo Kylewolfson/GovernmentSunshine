@@ -1,6 +1,13 @@
 var cytoscape = require('cytoscape');
+var Crawler = require('./../js/crawler.js').Crawler;
+var request = require('request');
+var cheerio = require('cheerio');
 
 $(document).ready(function(){
+
+  var callBack = function(object){
+    console.log(object);
+  }
   var key = 'a10550b4ef1141b580b7581fe3c76b1f';
 
   var firstName = "Harry";
@@ -23,11 +30,54 @@ $(document).ready(function(){
   return $.getJSON(bills).then(function(responseJSON){
     for(var i=0; i<responseJSON.results.length; i++){
       var title;
+      var billID = responseJSON.results[i].bill_id;
       if (responseJSON.results[i].short_title) {
         title = responseJSON.results[i].short_title
       } else {
         title = responseJSON.results[i].official_title
       }
+      $('#someDiv').append("<span id=" + billID + "><li>"+title+"</li></span>");
+      $('#'+ billID).click(function()  {
+
+        var toServer = 'http://localhost:4000/newServer';
+
+        $.getJSON(toServer).then(function(response){
+          //console.log(response.body);
+            var $ = cheerio.load(response.body);
+            $('#issue_summary > tbody > tr > td:nth-child(1)').each(function( index ) {
+              var company = $(this).text().trim();
+              cy.add({
+                data: { id: company, degree: 2}
+              })
+              cy.add({
+                data: {
+                  source: title,
+                  target: company,
+                  weight: .00001
+                }
+              })
+              console.log("Company: " + company);
+              //companyNames.push(company);
+            })
+          cy.layout({
+            name:'concentric',
+            fit: true,
+            minNodeSpacing: 0,
+            avoidOverlap: false,
+            concentric: function(){ // returns numeric value for each node, placing higher nodes in degrees towards the centre
+              return this.degree();
+            }
+          });
+          allElements = cy.elements();
+          var allNodes = allElements.filter('node');
+          var printThis = [];
+              allNodes.filter(function(i,ele){
+                  printThis.push(ele.id());
+                  printThis.push(ele.degree());
+              });
+              console.log(printThis);
+        })
+      })
       title = title.slice(0, 25);
       cy.add({
         data: { id: title, degree: 1}
@@ -36,7 +86,7 @@ $(document).ready(function(){
         data: {
           source: fullName,
           target: title,
-          weight: 1
+          weight: .1
         }
       })
       var openSecrets = responseJSON.results[i].number;
@@ -47,10 +97,11 @@ $(document).ready(function(){
       fit: true,
       minNodeSpacing: 0,
       avoidOverlap: false,
-      concentric: function(){ // returns numeric value for each node, placing higher nodes in levels towards the centre
+      concentric: function(){ // returns numeric value for each node, placing higher nodes in degrees towards the centre
         return this.degree();
       }
     });
+
     return responseJSON.results;
   })
   }

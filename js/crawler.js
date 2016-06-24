@@ -2,13 +2,14 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 
-exports.Crawler = function(bill){
-  this.bill = bill;
+exports.Crawler = function(){
 }
 
-exports.Crawler.prototype.getCompanies = function(listFunction){
+exports.Crawler.prototype.getCompanies = function(bill, listFunction){
+
   var b = bill;
-  request("https://www.opensecrets.org/lobby/billsum.php?id="+b, function(error, response, body) {
+  request("https://www.opensecrets.org/lobby/billsum.php?id=s2012-114", function(error, response, body) {
+      debugger;
     var companyNames = [];
     if(error) {
       console.log("Error: " + error);

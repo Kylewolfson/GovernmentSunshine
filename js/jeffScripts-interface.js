@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
+  event.preventDefault();
   $('.billSearch').keypress(function(event){
-    event.preventDefault();
     if(event.keyCode==13) {
       $('div.hiddenBills').fadeIn(7000).removeClass('hiddenBills');
       $('div.introContent').fadeOut(4000);
