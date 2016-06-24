@@ -1,33 +1,38 @@
-# _Github API call_
+# _Government Tracker_
 
-#### _Sets up an API call to github to return a user's profile and repositories, 4/27/2016_
+#### _This application allows the user to draw inferences concerning possible connections between lobbyist's and certain legislators_
 
-#### By _Kyle Wolfson_
+#### By _Kyle Wolfson, John Klein, Jeffrey Hackford, Justin Fokes, and Jacob Heffley_
 
 ## Description
 
-_Sets up an API call to github to return a user's profile and repositories, allowing a user to supply an api key for additional throttling or to go without one using the lower limit on calls. Clears the output between each submission, 4/27/2016_
+_This application utilizes three main componennts to draw inferences concerning bills and those lobbying for them: 1) cytoscape.js to "draw" connections; 2) several API calls--sometimes nested--which ultimately feed a webcrawler, which requests certain information from our server, newServer.js; and 3) implementation of materialize for styling purposes. This project was compiled using Node.js_
 
 ## Setup/Installation Requirements
 
-* _Supply an apikey in a local .env file using .apiKey for the variable name if desired._
+* _clone this repository: "https://github.com/Kylewolfson/GroupProjectMergeRepo.git"_
+* _npm install, bower install_
+* _open a different terminal and run the command "node newServer.js" in the root directory: let the server run in the background of this application_
 * _Use gulp build and then gulp serve to open the site in your browser and then just type a name in!_
 
 
 ## Known Bugs
 
-_No bugs at this time_
+_Bills with more than 10 companies associated with them are having some trouble being displayed._
 
 ## Support and contact details
 
 _wolfsonk@gmail.com_
+_johnbklein@gmail.com_
+_Jeffrey-hackford@gmail.com_
+_j.k.fokes@gmail.com_
 
 ## Technologies Used
 
-_Javascript, gulp, bower and npm_
+_Javascript, gulp, bower, npm, cytoscape, materialize, bootstrap, Jquery, node.js_
 
 ### License
 
 *MIT license*
 
-Copyright (c) 2016 **_Kyle Wolfson_**
+Copyright (c) 2016 **_Team Inc._**
